@@ -101,10 +101,6 @@ const LoggedIn = () => {
 };
 
 function App({ apiFacade }) {
-  //Props === apiFacade?
-
-  console.log(apiFacade);
-
   const [loginBool, setLoginBool] = useState(false);
 
   const logout = () => {
