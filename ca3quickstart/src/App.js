@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 
 import {
   HashRouter as Router,
@@ -12,9 +12,13 @@ import facade from "./apiFacade";
 import "./App.css";
 import uuid from "uuid/v1";
 
+/*
 function App({ loginFunctionality }) {
 
- const 
+ const emptyPerson = [
+	 {username = "", password = "" }
+ ];
+ const [person, setPerson] = useState("");
 
   return (
     <Router>
@@ -23,7 +27,7 @@ function App({ loginFunctionality }) {
           <Login />
         </Route>
         <Route path="/userpage">
-          <UserPage props = />
+          <UserPage props = {person} />
         </Route>
         <Route>
           <NoMatch />
@@ -34,6 +38,15 @@ function App({ loginFunctionality }) {
 }
 
 const Login = ({ props }) => {
+
+	const onChange = event =>{
+
+	};
+
+	useEffect(() =>{
+
+	});
+
   return (
     <div>
       <link
@@ -55,7 +68,12 @@ const Login = ({ props }) => {
 const UserPage = ({ props }) => {
   return(
 	  <div>
-
+		  <link
+    	    rel="stylesheet"
+    	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    	    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    	    crossorigin="anonymous"
+		  />
 	  </div>
   );
 };
@@ -63,44 +81,62 @@ const UserPage = ({ props }) => {
 const NoMatch = () => {
   return <h3>Nothing here but us lemmings</h3>;
 };
+*/
 
-class LogIn extends Component {
+const LogIn = ({ login }) => {
+  const emptyUser = { username: "", password: "" };
+  const [user, setUser] = useState(emptyUser);
+  /*
   constructor(props) {
     super(props);
     this.state = { username: "", password: "" };
-  }
-  login = evt => {
-    evt.preventDefault();
-    this.props.login(this.state.username, this.state.password);
+  }*/
+
+  useEffect(event => {
+    // login(user.username, user.password);
+    //console.log("hi");
+    // setUser({ [event.target.id]: event.target.value });
+    // setUser({ [event.target.id]: event.target.value });
+  });
+
+  const handleChange = event => {
+    event.preventDefault();
+    setUser({ ...user, [event.target.id]: event.target.value });
+    console.log("cake");
   };
-  onChange = evt => {
-    this.setState({ [evt.target.id]: evt.target.value });
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log("Submission..");
+    login(user.username, user.password);
+    Object.entries({ user }).map(o => console.log(o));
   };
-  render() {
-    return (
-      <div>
-        <link
-          rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous"
-        />
-        <h2>Login</h2>
-        <form onSubmit={this.login} onChange={this.onChange}>
-          <input placeholder="User Name" id="username" />
-          <input placeholder="Password" id="password" />
-          <button>Login</button>
-        </form>
-      </div>
-    );
-  }
-}
+
+  return (
+    <div>
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossOrigin="anonymous"
+      />
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit} onChange={handleChange}>
+        <input placeholder="User Name" id="username" />
+        <input placeholder="Password" id="password" />
+        <button>Login</button>
+      </form>
+    </div>
+  );
+};
+
 class LoggedIn extends Component {
   constructor(props) {
     super(props);
     this.state = { dataFromServer: "Fetching!!" };
   }
   componentDidMount() {}
+  // ^^ useEffect
   render() {
     return (
       <div>
