@@ -2,8 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import apiFacade from "./apiFacade";
+import { BrowserRouter as Router } from "react-router-dom";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const AppFacadeTime = () => {
+  return (
+    <Router>
+      <App apiFacade={apiFacade} />
+    </Router>
+  );
+};
+
+ReactDOM.render(<AppFacadeTime />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -13,21 +13,27 @@ import "./App.css";
 import uuid from "uuid/v1";
 
 /*
+####
+
+Note that the routing functionality is highly preferable. 
+Consider how to implement it with the current set up
+
+###
+
+*/
+
+/*
 function App({ loginFunctionality }) {
 
- const emptyPerson = [
-	 {username = "", password = "" }
- ];
- const [person, setPerson] = useState("");
 
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Login />
+          <LoginPage />
         </Route>
         <Route path="/userpage">
-          <UserPage props = {person} />
+          <UserPage />
         </Route>
         <Route>
           <NoMatch />
@@ -36,47 +42,6 @@ function App({ loginFunctionality }) {
     </Router>
   );
 }
-
-const Login = ({ props }) => {
-
-	const onChange = event =>{
-
-	};
-
-	useEffect(() =>{
-
-	});
-
-  return (
-    <div>
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous"
-      />
-      <h2>Login</h2>
-      <form onSubmit={this.login} onChange={this.onChange}>
-        <input placeholder="User Name" id="username" />
-        <input placeholder="Password" id="password" />
-        <button>Login</button>
-      </form>
-    </div>
-  );
-};
-
-const UserPage = ({ props }) => {
-  return(
-	  <div>
-		  <link
-    	    rel="stylesheet"
-    	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    	    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-    	    crossorigin="anonymous"
-		  />
-	  </div>
-  );
-};
 
 const NoMatch = () => {
   return <h3>Nothing here but us lemmings</h3>;
@@ -90,7 +55,6 @@ const LogIn = ({ login }) => {
   const handleChange = event => {
     event.preventDefault();
     setUser({ ...user, [event.target.id]: event.target.value });
-    console.log("cake");
   };
 
   const handleSubmit = event => {
@@ -122,7 +86,7 @@ const LoggedIn = () => {
   const [data, setData] = useState("Fetching");
 
   /*useEffect(() =>{
-    Insert user name here with set.
+    Insert user name here reactions here
 	});
 */
 
@@ -136,18 +100,21 @@ const LoggedIn = () => {
   );
 };
 
-function App() {
+function App({ apiFacade }) {
   //Props === apiFacade?
+
+  console.log(apiFacade);
 
   const [loginBool, setLoginBool] = useState(false);
 
   const logout = () => {
-    facade.logout();
+    apiFacade().logout();
     setLoginBool(false);
   }; //TODO
   const login = (user, pass) => {
-    //facade.login(user, pass).then(res => this.setState({ loggedIn: true }));
-    facade.login(user, pass).then(res => setLoginBool(true));
+    apiFacade()
+      .login(user, pass)
+      .then(res => setLoginBool(true));
   }; //TODO
 
   return (
