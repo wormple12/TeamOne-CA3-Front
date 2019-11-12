@@ -86,18 +86,6 @@ const NoMatch = () => {
 const LogIn = ({ login }) => {
   const emptyUser = { username: "", password: "" };
   const [user, setUser] = useState(emptyUser);
-  /*
-  constructor(props) {
-    super(props);
-    this.state = { username: "", password: "" };
-  }*/
-
-  useEffect(event => {
-    // login(user.username, user.password);
-    //console.log("hi");
-    // setUser({ [event.target.id]: event.target.value });
-    // setUser({ [event.target.id]: event.target.value });
-  });
 
   const handleChange = event => {
     event.preventDefault();
@@ -130,47 +118,49 @@ const LogIn = ({ login }) => {
   );
 };
 
-class LoggedIn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { dataFromServer: "Fetching!!" };
-  }
-  componentDidMount() {}
+const LoggedIn = () => {
+  const [data, setData] = useState("Fetching");
+
+  /*useEffect(() =>{
+    Insert user name here with set.
+	});
+*/
+
+  //componentDidMount() {}
   // ^^ useEffect
-  render() {
-    return (
-      <div>
-        <h2>Data Received from server</h2>
-        <h3>{this.state.dataFromServer}</h3>
-      </div>
-    );
-  }
-}
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { loggedIn: false };
-  }
-  logout = () => {
+  return (
+    <div>
+      <h2>Data Received from server</h2>
+      <h3>{data}</h3>
+    </div>
+  );
+};
+
+function App() {
+  //Props === apiFacade?
+
+  const [loginBool, setLoginBool] = useState(false);
+
+  const logout = () => {
     facade.logout();
-    this.setState({ loggedIn: false });
+    setLoginBool(false);
   }; //TODO
-  login = (user, pass) => {
-    facade.login(user, pass).then(res => this.setState({ loggedIn: true }));
+  const login = (user, pass) => {
+    //facade.login(user, pass).then(res => this.setState({ loggedIn: true }));
+    facade.login(user, pass).then(res => setLoginBool(true));
   }; //TODO
-  render() {
-    return (
-      <div>
-        {!this.state.loggedIn ? (
-          <LogIn login={this.login} />
-        ) : (
-          <div>
-            <LoggedIn />
-            <button onClick={this.logout}>Logout</button>
-          </div>
-        )}
-      </div>
-    );
-  }
+
+  return (
+    <div>
+      {!loginBool ? (
+        <LogIn login={login} />
+      ) : (
+        <div>
+          <LoggedIn />
+          <button onClick={logout}>Logout</button>
+        </div>
+      )}
+    </div>
+  );
 }
 export default App;
