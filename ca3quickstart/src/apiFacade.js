@@ -1,4 +1,5 @@
 import configuration from "./settings";
+import jwt_decode from "jwt-decode";
 
 const URL = configuration.URL;
 
@@ -14,6 +15,11 @@ function apiFacade() {
     facade.fetchData().then(res => this.setState({ dataFromServer: res }));
     const options = makeOptions("GET", true); //True add's the token
     return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
+  };
+
+  const tokenDecoder = () => {
+    let decodedToken = jwt_decode(localStorage.getItem("jwtToken"));
+    return decodedToken;
   };
 
   const setToken = token => {
@@ -64,6 +70,7 @@ function apiFacade() {
     setToken: setToken,
     getToken: getToken,
     makeOptions: makeOptions,
+    tokenDecoder: tokenDecoder,
     loggedIn: loggedIn,
     login: login,
     logout: logout

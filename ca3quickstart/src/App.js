@@ -12,6 +12,15 @@ import facade from "./apiFacade";
 import "./App.css";
 import uuid from "uuid/v1";
 
+const genericBootstrap = (
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossOrigin="anonymous"
+  />
+);
+
 /*
 ####
 
@@ -66,12 +75,7 @@ const LogIn = ({ login }) => {
 
   return (
     <div>
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossOrigin="anonymous"
-      />
+      {genericBootstrap}
       <h2>Login</h2>
       <form onSubmit={handleSubmit} onChange={handleChange}>
         <input placeholder="User Name" id="username" />
@@ -82,8 +86,10 @@ const LogIn = ({ login }) => {
   );
 };
 
-const LoggedIn = () => {
+const LoggedIn = ({ props, apiFacade }) => {
   const [data, setData] = useState("Fetching");
+  console.log("apifacade check: ", apiFacade());
+  console.log("Token check: ", apiFacade().tokenDecoder());
 
   /*useEffect(() =>{
     Insert user name here reactions here
@@ -94,20 +100,25 @@ const LoggedIn = () => {
   // ^^ useEffect
   return (
     <div>
+      {genericBootstrap}
       <h2>Data Received from server</h2>
       <h3>{data}</h3>
+      <h3>User Name: {props}</h3>
+      <h3>Role: {apiFacade().tokenDecoder().roles}</h3>
     </div>
   );
 };
 
 function App({ apiFacade }) {
   const [loginBool, setLoginBool] = useState(false);
+  const [userInfo, setUserInfo] = useState("");
 
   const logout = () => {
     apiFacade().logout();
     setLoginBool(false);
   }; //TODO
   const login = (user, pass) => {
+    setUserInfo(user);
     apiFacade()
       .login(user, pass)
       .then(res => setLoginBool(true));
@@ -119,7 +130,7 @@ function App({ apiFacade }) {
         <LogIn login={login} />
       ) : (
         <div>
-          <LoggedIn />
+          <LoggedIn props={userInfo} apiFacade={apiFacade} />
           <button onClick={logout}>Logout</button>
         </div>
       )}
