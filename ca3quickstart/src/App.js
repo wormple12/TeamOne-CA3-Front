@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
 import "./App.css";
 import LogIn from "./components/LogIn";
 import Header from "./components/Header";
@@ -12,7 +18,7 @@ const NoMatch = () => {
 const StartPage = () => {
   return (
     <div>
-      <h3>Start Page</h3>
+      <h1>Start Page</h1>
     </div>
   );
 };
