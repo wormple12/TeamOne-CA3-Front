@@ -1,13 +1,14 @@
 import configuration from "./settings";
 import { handleHttpErrors } from "./utils";
+import jwt_decode from "jwt-decode";
 
 const URL = configuration.URL;
 
-function apiFacade() {
-  const fetchData = () => {
+function loginFacade() {
+  /* const fetchData = () => {
     const options = makeOptions("GET", true); //True add's the token
     return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
-  };
+  }; */
 
   const makeOptions = (method, addToken, body) => {
     var opts = {
@@ -24,6 +25,11 @@ function apiFacade() {
       opts.body = JSON.stringify(body);
     }
     return opts;
+  };
+
+  const tokenDecoder = () => {
+    let decodedToken = jwt_decode(localStorage.getItem("jwtToken"));
+    return decodedToken;
   };
 
   const setToken = token => {
@@ -53,15 +59,16 @@ function apiFacade() {
   };
 
   return {
-    fetchData: fetchData,
+    /* fetchData: fetchData, */
     setToken: setToken,
     getToken: getToken,
+    makeOptions: makeOptions,
+    tokenDecoder: tokenDecoder,
     loggedIn: loggedIn,
     login: login,
-    logout: logout,
-    makeOptions: makeOptions
+    logout: logout
   };
 }
 
-let facade = apiFacade();
-export default apiFacade;
+let facade = loginFacade();
+export default facade;

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import apiFacade from "./apiFacade";
+import loginFacade from "./loginFacade";
 import { BrowserRouter as Router } from "react-router-dom";
 
 const AppFacadeTime = () => {
@@ -14,9 +14,9 @@ const AppFacadeTime = () => {
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossOrigin="anonymous"
       />
-      <Router>
-        <App apiFacade={apiFacade} />
-      </Router>
+      {/* <Router> */}
+      <App loginFacade={loginFacade} />
+      {/* </Router> */}
     </div>
   );
 };
