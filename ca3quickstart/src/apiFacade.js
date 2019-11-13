@@ -1,4 +1,7 @@
-const URL = "http://localhost:8080/securitystarter";
+import configuration from "./settings";
+
+const URL = configuration.URL;
+
 function handleHttpErrors(res) {
   if (!res.ok) {
     return Promise.reject({ status: res.status, fullError: res.json() });
