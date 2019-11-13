@@ -1,5 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import {
   HashRouter as Router,
   Switch,
@@ -8,9 +7,9 @@ import {
   useParams,
   NavLink
 } from "react-router-dom";
-import facade from "./apiFacade";
 import "./App.css";
-import uuid from "uuid/v1";
+import { catchHttpErrors } from "./utils";
+/* import uuid from "uuid/v1"; */
 
 /*
 ####
@@ -22,8 +21,7 @@ Consider how to implement it with the current set up
 
 */
 
-/*
-function App({ loginFunctionality }) {
+/* function App({ loginFunctionality }) {
 
 
   return (
@@ -41,12 +39,11 @@ function App({ loginFunctionality }) {
       </Switch>
     </Router>
   );
-}
+} */
 
 const NoMatch = () => {
-  return <h3>Nothing here but us lemmings</h3>;
+  return <h3>The page was not found.</h3>;
 };
-*/
 
 const LogIn = ({ login }) => {
   const emptyUser = { username: "", password: "" };
@@ -66,12 +63,6 @@ const LogIn = ({ login }) => {
 
   return (
     <div>
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossOrigin="anonymous"
-      />
       <h2>Login</h2>
       <form onSubmit={handleSubmit} onChange={handleChange}>
         <input placeholder="User Name" id="username" />
@@ -110,7 +101,10 @@ function App({ apiFacade }) {
   const login = (user, pass) => {
     apiFacade()
       .login(user, pass)
-      .then(res => setLoginBool(true));
+      .then(res => setLoginBool(true))
+      .catch(err => {
+        catchHttpErrors(err);
+      });
   }; //TODO
 
   return (
