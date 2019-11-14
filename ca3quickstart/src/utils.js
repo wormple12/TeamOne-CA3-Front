@@ -1,3 +1,5 @@
+import loginFacade from "./loginFacade";
+
 export function catchHttpErrors(err) {
   if (err.status) {
     err.fullError.then(e => console.log(e.detail));
@@ -13,16 +15,17 @@ export function handleHttpErrors(res) {
   return res.json();
 }
 
-export const makeOptions = (method, addToken, body, loggedIn) => {
+export const makeOptions = (method, addToken, body) => {
   var opts = {
     method: method,
     headers: {
       "Content-type": "application/json",
       Accept: "application/json"
+      //"x-access-token":localStorage.getItem("jwtToken")
     }
   };
-  if (addToken && loggedIn) {
-    opts.headers["x-access-token"] = getToken();
+  if (addToken && loginFacade.loggedIn()) {
+    opts.headers["x-access-token"] = loginFacade.getToken();
   }
   if (body) {
     opts.body = JSON.stringify(body);

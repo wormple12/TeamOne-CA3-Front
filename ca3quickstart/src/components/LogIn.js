@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { catchHttpErrors } from "../utils";
+import { catchHttpErrors, makeOptions } from "../utils";
+import configuration from "../settings";
+import { handleHttpErrors } from "../utils";
 
 const LogIn = ({ apiFacade, loggedIn, setLoggedIn }) => {
   //
@@ -56,18 +58,25 @@ const LogInForm = ({ login }) => {
 };
 
 const LoggedIn = ({ apiFacade, logout }) => {
+  const options = makeOptions("GET", true);
+  console.log(options);
   const [data, setData] = useState("Fetching");
-
   console.log("apifacade check: ", apiFacade);
   console.log("Token check: ", apiFacade.tokenDecoder());
+    console.log(apiFacade.getToken());
+    const user = fetch(configuration.URL + "/api/starwars/"+apiFacade.tokenDecoder().username, options)
+    .then(
+      handleHttpErrors
+    ).then(data => {setData(data.msg);}
+      );
+    
 
-  return (
-    <div>
-      <h2>Data Received from server</h2>
-      <h3>{data}</h3>
-      <h3>User Name: {apiFacade.tokenDecoder().username}</h3>
-      <h3>Role: {apiFacade.tokenDecoder().roles}</h3>
-      <button onClick={logout}>Logout</button>
-    </div>
-  );
-};
+    return (
+      <div>
+        <h2>Data Received from server</h2>
+        <h3>{data}</h3>
+        <button onClick={logout}>Logout</button>
+      </div>
+    );
+  }
+
