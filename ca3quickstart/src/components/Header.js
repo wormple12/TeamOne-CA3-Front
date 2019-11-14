@@ -1,7 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ loggedIn }) => {
+  const userHeaders = loggedIn ? (
+    <li>
+      <NavLink activeClassName="active" to="/starWars">
+        Star Wars
+      </NavLink>
+    </li>
+  ) : (
+    ""
+  );
   return (
     <ul className="header">
       <li>
@@ -14,11 +23,7 @@ const Header = () => {
           Log In
         </NavLink>
       </li>
-      <li>
-        <NavLink activeClassName="active" to="/star">
-          Star Wars
-        </NavLink>
-      </li>
+      {userHeaders}
     </ul>
   );
 };

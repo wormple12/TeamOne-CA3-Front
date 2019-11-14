@@ -5,11 +5,8 @@ import jwt_decode from "jwt-decode";
 const URL = configuration.URL;
 
 function loginFacade() {
-  /* const fetchData = () => {
-    const options = makeOptions("GET", true); //True add's the token
-    return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
-  }; */
-
+  // SHOULDN'T BE HERE, BUT RATHER BE IMPORTED FROM UTILS.JS
+  // CAN'T BECAUSE UTILS ALSO IMPORTS LOGINFACADE
   const makeOptions = (method, addToken, body) => {
     var opts = {
       method: method,
@@ -59,7 +56,6 @@ function loginFacade() {
   };
 
   return {
-    /* fetchData: fetchData, */
     setToken: setToken,
     getToken: getToken,
     makeOptions: makeOptions,

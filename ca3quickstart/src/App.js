@@ -4,7 +4,8 @@ import {
   Switch,
   Route,
   useRouteMatch,
-  useParams
+  useParams,
+  Redirect
 } from "react-router-dom";
 import "./App.css";
 import LogIn from "./components/LogIn";
@@ -23,12 +24,34 @@ const StartPage = () => {
   );
 };
 
-function App({ loginFacade }) {
+const StarWarsPerson = ({ loggedIn }) => {
+  if (!loggedIn) {
+    return <Redirect to={"/loggedOut"} />;
+  } else {
+    return (
+      <div>
+        <h1>Star Wars</h1>
+      </div>
+    );
+  }
+};
+
+function App({ loginFacade, starFacade }) {
   const [loggedIn, setLoggedIn] = useState(false);
+
+  // check token regularly
+  useEffect(() => {
+    /* loginFacade.logout(); */
+    const interval = setInterval(() => {
+      setLoggedIn(loginFacade.loggedIn());
+    }, 10000);
+    setLoggedIn(loginFacade.loggedIn());
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Router>
-      <Header />
+      <Header loggedIn={loggedIn} />
       <Switch>
         <Route exact path="/">
           <StartPage />
@@ -39,6 +62,9 @@ function App({ loginFacade }) {
             loggedIn={loggedIn}
             setLoggedIn={setLoggedIn}
           />
+        </Route>
+        <Route path="/starWars">
+          <StarWarsPerson apiFacade={starFacade} loggedIn={loggedIn} />
         </Route>
         <Route>
           <NoMatch />
