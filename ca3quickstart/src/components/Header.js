@@ -15,7 +15,7 @@ const Header = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName="active" to="/star">
+        <NavLink activeClassName="active" to="/starWars">
           Star Wars
         </NavLink>
       </li>
