@@ -21,7 +21,6 @@ export const makeOptions = (method, addToken, body) => {
     headers: {
       "Content-type": "application/json",
       Accept: "application/json"
-      //"x-access-token":localStorage.getItem("jwtToken")
     }
   };
   if (addToken && loginFacade.loggedIn()) {

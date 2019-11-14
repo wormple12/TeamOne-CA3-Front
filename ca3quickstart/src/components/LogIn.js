@@ -3,6 +3,7 @@ import { catchHttpErrors, makeOptions } from "../utils";
 import configuration from "../settings";
 import { handleHttpErrors } from "../utils";
 
+<<<<<<< HEAD
 const LogIn = ({ apiFacade, loggedIn, setLoggedIn, starFacade }) => {
 	//
 	const logout = () => {
@@ -30,6 +31,34 @@ const LogIn = ({ apiFacade, loggedIn, setLoggedIn, starFacade }) => {
 			)}
 		</div>
 	);
+=======
+const LogIn = ({ apiFacade, loggedIn, setLoggedIn }) => {
+
+  const logout = () => {
+    apiFacade.logout();
+    setLoggedIn(false);
+  };
+  const login = (user, pass) => {
+    apiFacade
+      .login(user, pass)
+      .then(res => setLoggedIn(true))
+      .catch(err => {
+        console.log(err)
+        err.fullError.then(function(result) {alert(result.message)});
+        catchHttpErrors(err);
+      });
+  };
+  return (
+    <div>
+      {!loggedIn ? (
+        <LogInForm login={login} />
+      ) : (
+        <LoggedIn apiFacade={apiFacade} logout={logout} />
+      )}
+    </div>
+    
+  );
+>>>>>>> 5f522d20b0f6ec50beb2f5969297f92c0c3cd71d
 };
 
 export default LogIn;
@@ -61,6 +90,7 @@ const LogInForm = ({ login }) => {
 	);
 };
 
+<<<<<<< HEAD
 const LoggedIn = ({ apiFacade, logout, starFacade }) => {
 	const [starInfo, setStarInfo] = useState(null);
 
@@ -83,4 +113,29 @@ const LoggedIn = ({ apiFacade, logout, starFacade }) => {
 			<button onClick={logout}>Logout</button>
 		</div>
 	);
+=======
+const LoggedIn = ({ apiFacade, logout }) => {
+  const options = makeOptions("GET", true);
+  console.log(options);
+  const [data, setData] = useState("Fetching");
+  console.log("apifacade check: ", apiFacade);
+  console.log("Token check: ", apiFacade.tokenDecoder());
+  console.log(apiFacade.getToken());
+  const user = fetch(
+    configuration.URL + "/api/starwars/" + apiFacade.tokenDecoder().username,
+    options
+  )
+    .then(handleHttpErrors)
+    .then(data => {
+      setData(data.msg);
+    });
+
+  return (
+    <div>
+      <h2>Data Received from server</h2>
+      <h3>{data}</h3>
+      <button onClick={logout}>Logout</button>
+    </div>
+  );
+>>>>>>> 5f522d20b0f6ec50beb2f5969297f92c0c3cd71d
 };
