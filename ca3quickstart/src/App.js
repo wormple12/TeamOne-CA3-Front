@@ -23,12 +23,20 @@ const StartPage = () => {
   );
 };
 
+const StarWarsPerson = () => {
+  return (
+    <div>
+      <h1>Star Wars</h1>
+    </div>
+  );
+};
+
 function App({ loginFacade, starFacade }) {
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <Router>
-      <Header />
+      <Header loggedIn={loggedIn} />
       <Switch>
         <Route exact path="/">
           <StartPage />
