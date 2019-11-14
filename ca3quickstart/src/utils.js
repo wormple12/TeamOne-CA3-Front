@@ -12,3 +12,20 @@ export function handleHttpErrors(res) {
   }
   return res.json();
 }
+
+export const makeOptions = (method, addToken, body, loggedIn) => {
+  var opts = {
+    method: method,
+    headers: {
+      "Content-type": "application/json",
+      Accept: "application/json"
+    }
+  };
+  if (addToken && loggedIn) {
+    opts.headers["x-access-token"] = getToken();
+  }
+  if (body) {
+    opts.body = JSON.stringify(body);
+  }
+  return opts;
+};

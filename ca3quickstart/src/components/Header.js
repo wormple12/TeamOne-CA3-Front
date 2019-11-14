@@ -14,6 +14,11 @@ const Header = () => {
           Log In
         </NavLink>
       </li>
+      <li>
+        <NavLink activeClassName="active" to="/star">
+          Star Wars
+        </NavLink>
+      </li>
     </ul>
   );
 };
