@@ -4,7 +4,7 @@ import configuration from "../settings";
 import { handleHttpErrors } from "../utils";
 
 const LogIn = ({ apiFacade, loggedIn, setLoggedIn }) => {
-  //
+
   const logout = () => {
     apiFacade.logout();
     setLoggedIn(false);
@@ -14,6 +14,8 @@ const LogIn = ({ apiFacade, loggedIn, setLoggedIn }) => {
       .login(user, pass)
       .then(res => setLoggedIn(true))
       .catch(err => {
+        console.log(err)
+        err.fullError.then(function(result) {alert(result.message)});
         catchHttpErrors(err);
       });
   };
@@ -25,6 +27,7 @@ const LogIn = ({ apiFacade, loggedIn, setLoggedIn }) => {
         <LoggedIn apiFacade={apiFacade} logout={logout} />
       )}
     </div>
+    
   );
 };
 
