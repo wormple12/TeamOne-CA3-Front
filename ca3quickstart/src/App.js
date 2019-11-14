@@ -23,7 +23,7 @@ const StartPage = () => {
   );
 };
 
-function App({ loginFacade }) {
+function App({ loginFacade, starFacade }) {
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
@@ -39,6 +39,9 @@ function App({ loginFacade }) {
             loggedIn={loggedIn}
             setLoggedIn={setLoggedIn}
           />
+        </Route>
+        <Route path="/starWars">
+          <StarWarsPerson apiFacade={starFacade} loggedIn={loggedIn} />
         </Route>
         <Route>
           <NoMatch />

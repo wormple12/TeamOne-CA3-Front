@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import loginFacade from "./loginFacade";
-import { BrowserRouter as Router } from "react-router-dom";
 
 const AppFacadeTime = () => {
   return (
