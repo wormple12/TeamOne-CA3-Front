@@ -46,6 +46,7 @@ const starFacade = (function() {
 						</tr>
 					</tbody>
 				</table>
+				{MultiTable2(info)}
 			</div>
 		);
 	}
@@ -92,6 +93,8 @@ const starFacade = (function() {
 		);
 		let kdrjl = kdr.map(o => Object.values(Object.values(o)));
 		let kdrjll = kdrjl.map(o => Object.values(o)[1]);
+		console.log(kdr);
+		let count = 0;
 
 		return (
 			<div>
