@@ -64,7 +64,7 @@ const LoggedIn = ({ apiFacade, logout }) => {
   const options = makeOptions("GET", true);
   const [data, setData] = useState("Fetching");
   const user = fetch(
-    configuration.URL + "/api/starwars/" + apiFacade.tokenDecoder().username,
+    configuration.URL + "/api/starwars/" + apiFacade.tokenDecoder().roles,
     options
   )
     .then(handleHttpErrors)

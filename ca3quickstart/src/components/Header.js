@@ -9,7 +9,11 @@ const Header = ({ loggedIn }) => {
       </NavLink>
     </li>
   ) : (
-    ""
+    <li>
+        <NavLink activeClassName="active" to="/createUser">
+          Create User
+        </NavLink>
+      </li>
   );
   return (
     <ul className="header">
@@ -23,6 +27,7 @@ const Header = ({ loggedIn }) => {
           Log In
         </NavLink>
       </li>
+      
       {userHeaders}
     </ul>
   );

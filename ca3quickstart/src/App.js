@@ -4,6 +4,7 @@ import "./App.css";
 import LogIn from "./components/LogIn";
 import Header from "./components/Header";
 import StarWarsPerson from "./components/StarWarsPerson";
+import CreateUserPage from "./components/createUserPage";
 /* import uuid from "uuid/v1"; */
 
 const NoMatch = () => {
@@ -18,7 +19,7 @@ const StartPage = () => {
   );
 };
 
-function App({ loginFacade, starFacade }) {
+function App({ loginFacade, starFacade, createUserFacade }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [starInfo, setStarInfo] = useState(null);
 
@@ -38,6 +39,11 @@ function App({ loginFacade, starFacade }) {
       <Switch>
         <Route exact path="/">
           <StartPage />
+        </Route>
+        <Route path="/createUser">
+          <CreateUserPage 
+          factory={createUserFacade}
+          />
         </Route>
         <Route path="/login">
           <LogIn

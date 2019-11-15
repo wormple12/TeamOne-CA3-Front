@@ -26,6 +26,7 @@ function loginFacade() {
 
 	const tokenDecoder = () => {
 		let decodedToken = jwt_decode(localStorage.getItem("jwtToken"));
+		console.log(decodedToken)
 		return decodedToken;
 	};
 
