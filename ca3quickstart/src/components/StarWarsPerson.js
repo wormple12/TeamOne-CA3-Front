@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { catchHttpErrors } from "../utils";
+import utils, { catchHttpErrors } from "../utils";
 import {
   Route,
   Link,
@@ -12,16 +12,16 @@ import {
 const StarWarsPage = ({ loggedIn, starFacade, starInfo, setStarInfo }) => {
   const match = useRouteMatch();
   const [id, setId] = useState("");
-  const shouldBlock = () => {
+  /* const shouldBlock = () => {
     return id !== "";
   };
-  let [isBlocking, setIsBlocking] = useState(shouldBlock);
+  let [isBlocking, setIsBlocking] = useState(shouldBlock); */
 
   const handleChange = evt => {
     const target = evt.target;
     const value = target.value;
     setId(value);
-    setIsBlocking(shouldBlock);
+    /* setIsBlocking(shouldBlock); */
   };
 
   const handleSubmit = evt => {
@@ -36,12 +36,12 @@ const StarWarsPage = ({ loggedIn, starFacade, starInfo, setStarInfo }) => {
     return (
       <div>
         <form onSubmit={handleSubmit} onChange={handleChange}>
-          <Prompt
+          {/* <Prompt
             when={isBlocking}
             message={location =>
               `Are you sure you want to go to ${location.pathname}`
             }
-          />
+          /> */}
           <input
             type="number"
             id="id"
@@ -65,17 +65,32 @@ const StarWarsPage = ({ loggedIn, starFacade, starInfo, setStarInfo }) => {
   }
 };
 
+/* const StarWarsPerson = ({ loggedIn, starFacade, starInfo, setStarInfo }) => {
+	useEffect(() => {
+		starFacade
+			.FetchStar(1)
+			.then(d => setStarInfo())
+			.catch(o => {
+				catchHttpErrors(o);
+			});
+	}, []);
+
+	if (!loggedIn) {
+		return <Redirect to={"/loggedOut"} />;
+	} else {
+		return <div>{starInfo}</div>;
+	}
+}; */
+
 const PersonTables = ({ starFacade, starInfo, setStarInfo }) => {
-  const { id } = useParams();
+  let { id } = useParams();
 
   useEffect(() => {
     starFacade
       .FetchStar(id)
-      .then(d => setStarInfo(starFacade.embeddedTableCreation(d)))
-      .catch(o => {
-        catchHttpErrors(o);
-      });
-  }, []);
+      .then(d => setStarInfo(utils.embeddedTableCreation(d)))
+      .catch(catchHttpErrors);
+  }, [id]);
 
   return (
     <div>
@@ -84,22 +99,5 @@ const PersonTables = ({ starFacade, starInfo, setStarInfo }) => {
     </div>
   );
 };
-
-/* const StarWarsPerson = ({ loggedIn, starFacade, starInfo, setStarInfo }) => {
-  useEffect(() => {
-    starFacade
-      .FetchStar(1)
-      .then(d => setStarInfo(starFacade.embeddedTableCreation(d)))
-      .catch(o => {
-        catchHttpErrors(o);
-      });
-  }, []);
-
-  if (!loggedIn) {
-    return <Redirect to={"/loggedOut"} />;
-  } else {
-    return <div>{starInfo}</div>;
-  }
-}; */
 
 export default StarWarsPage;
