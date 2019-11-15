@@ -13,6 +13,7 @@ import { handleHttpErrors, makeOptions } from "./utils";
 import configuration from "./settings";
 import apiFacade from "./loginFacade";
 import { object } from "prop-types";
+import uuid from "uuid/v1";
 
 const starFacade = (function() {
 	function FetchStar(id) {
@@ -35,19 +36,19 @@ const starFacade = (function() {
 					<thead>
 						<tr>
 							{Object.values(noObjects).map(j => (
-								<th>{j[0]}</th>
+								<th key={uuid()}>{j[0]}</th>
 							))}
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							{Object.values(noObjects).map(j => (
-								<td>{j[1]}</td>
+								<td key={uuid()}>{j[1]}</td>
 							))}
 						</tr>
 					</tbody>
-					<br></br>
 				</table>
+				<br></br>
 				{multiTable2(info)}
 			</div>
 		);
@@ -62,30 +63,28 @@ const starFacade = (function() {
 				"function"
 		);
 
-		console.log(kdr);
-
 		return (
 			<div>
 				{kdr.map(o => (
-					<div>
+					<div key={uuid()}>
 						<h3>{Object.values(o[0])}</h3>
 						<table className="table">
 							<thead>
 								<tr>
 									{Object.keys(o[1]).map(j => (
-										<th>{j}</th>
+										<th key={uuid()}>{j}</th>
 									))}
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									{Object.values(o[1]).map(j => (
-										<td>{j}</td>
+										<td key={uuid()}>{j}</td>
 									))}
 								</tr>
 							</tbody>
-							<br></br>
 						</table>
+						<br></br>
 					</div>
 				))}
 			</div>
@@ -108,28 +107,28 @@ const starFacade = (function() {
 			<div>
 				{multiTable(info)}
 				{kdrjll.map(o => (
-					<div>
+					<div key={uuid()}>
 						<h3>{Object.values(kdrjl[count++][0])}</h3>
 
 						<table className="table">
 							<thead>
 								<tr>
 									{Object.keys(Object.values(o)[0]).map(k => (
-										<th>{k}</th>
+										<th key={uuid()}>{k}</th>
 									))}
 								</tr>
 							</thead>
 							<tbody>
 								{Object.values(o).map(j => (
-									<tr>
+									<tr key={uuid()}>
 										{Object.values(j).map(k => (
-											<td>{k}</td>
+											<td key={uuid()}>{k}</td>
 										))}
 									</tr>
 								))}
 							</tbody>
-							<br></br>
 						</table>
+						<br></br>
 					</div>
 				))}
 			</div>
