@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { catchHttpErrors } from "../utils";
 import { Redirect } from "react-router-dom";
+import utils from "../utils";
 
 const StarWarsPerson = ({ loggedIn, starFacade, starInfo, setStarInfo }) => {
 	useEffect(() => {
 		starFacade
 			.FetchStar(1)
-			.then(d => setStarInfo(starFacade.embeddedTableCreation(d)))
+			.then(d => setStarInfo(utils.embeddedTableCreation(d)))
 			.catch(o => {
 				catchHttpErrors(o);
 			});
