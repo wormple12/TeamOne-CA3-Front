@@ -3,8 +3,8 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import LogIn from "./components/LogIn";
 import Header from "./components/Header";
-import StarWarsPerson from "./components/StarWarsPerson";
 import CreateUserPage from "./components/createUserPage";
+import StarWarsPage from "./components/StarWarsPage";
 /* import uuid from "uuid/v1"; */
 
 const NoMatch = () => {
@@ -22,6 +22,7 @@ const StartPage = () => {
 function App({ loginFacade, starFacade, createUserFacade }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [starInfo, setStarInfo] = useState(null);
+  const [starId, setStarId] = useState("");
 
   // check token regularly
   useEffect(() => {
@@ -35,7 +36,7 @@ function App({ loginFacade, starFacade, createUserFacade }) {
 
   return (
     <Router>
-      <Header loggedIn={loggedIn} />
+      <Header loggedIn={loggedIn} starId={starId} />
       <Switch>
         <Route exact path="/">
           <StartPage />
@@ -54,11 +55,13 @@ function App({ loginFacade, starFacade, createUserFacade }) {
           />
         </Route>
         <Route path="/starWars">
-          <StarWarsPerson
+          <StarWarsPage
             starFacade={starFacade}
             loggedIn={loggedIn}
             starInfo={starInfo}
             setStarInfo={setStarInfo}
+            id={starId}
+            setId={setStarId}
           />
         </Route>
         <Route>

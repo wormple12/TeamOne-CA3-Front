@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Header = ({ loggedIn }) => {
+const Header = ({ loggedIn, personId }) => {
   const userHeaders = loggedIn ? (
     <li>
       <NavLink activeClassName="active" to="/starWars">
