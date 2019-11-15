@@ -52,40 +52,28 @@ const starFacade = (function() {
 
 	function MultiTable(info) {
 		let d = Object.entries({ ...info });
-		console.log(d);
 		let kd = d.filter(o => typeof Object.values(o)[1] === "object");
-		console.log(kd);
 		let kdr = kd.filter(
 			o =>
 				typeof Object.values(Object.values(o))[1][Symbol.iterator] !==
 				"function"
 		);
-		kd.map(o => console.log(Object.values(Object.values(o))[1]));
-
-		kd.map(o =>
-			console.log(
-				typeof Object.values(Object.values(o))[1][Symbol.iterator] ===
-					"function"
-			)
-		);
-
-		console.log(kdr);
 
 		return (
 			<div>
-				{Object.entries(kdr)[1].map(o => (
-					<table>
+				{kdr.map(o => (
+					<table className="table">
 						<thead>
 							<tr>
-								{Object.values(o).map(j => (
-									<td>{j[1]}</td>
+								{Object.keys(o[1]).map(j => (
+									<td>{j}</td>
 								))}
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								{Object.values(o[1]).map(j => (
-									<td>{j[1]}</td>
+									<td>{j}</td>
 								))}
 							</tr>
 						</tbody>
@@ -94,8 +82,6 @@ const starFacade = (function() {
 			</div>
 		);
 	}
-
-	function MultiTable2(info) {}
 
 	return {
 		FetchStar: FetchStar,
