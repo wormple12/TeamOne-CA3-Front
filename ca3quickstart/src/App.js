@@ -24,9 +24,7 @@ const StartPage = () => {
 	);
 };
 
-const StarWarsPerson = ({ loggedIn, starFacade }) => {
-	const [starInfo, setStarInfo] = useState(null);
-
+const StarWarsPerson = ({ loggedIn, starFacade, starInfo, setStarInfo }) => {
 	useEffect(() => {
 		starFacade
 			.FetchStar(1)
@@ -43,6 +41,7 @@ const StarWarsPerson = ({ loggedIn, starFacade }) => {
 
 function App({ loginFacade, starFacade }) {
 	const [loggedIn, setLoggedIn] = useState(false);
+	const [starInfo, setStarInfo] = useState(null);
 
 	// check token regularly
 	useEffect(() => {
@@ -70,7 +69,12 @@ function App({ loginFacade, starFacade }) {
 					/>
 				</Route>
 				<Route path="/starWars">
-					<StarWarsPerson starFacade={starFacade} loggedIn={loggedIn} />
+					<StarWarsPerson
+						starFacade={starFacade}
+						loggedIn={loggedIn}
+						starInfo={starInfo}
+						setStarInfo={setStarInfo}
+					/>
 				</Route>
 				<Route>
 					<NoMatch />
