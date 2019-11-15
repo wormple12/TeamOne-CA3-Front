@@ -30,6 +30,7 @@ const starFacade = (function() {
 		);
 		return (
 			<div>
+				<h3>Person</h3>
 				<table className="table">
 					<thead>
 						<tr>
@@ -45,6 +46,7 @@ const starFacade = (function() {
 							))}
 						</tr>
 					</tbody>
+					<br></br>
 				</table>
 				{multiTable2(info)}
 			</div>
@@ -59,25 +61,32 @@ const starFacade = (function() {
 				typeof Object.values(Object.values(o))[1][Symbol.iterator] !==
 				"function"
 		);
+
+		console.log(kdr);
+
 		return (
 			<div>
 				{kdr.map(o => (
-					<table className="table">
-						<thead>
-							<tr>
-								{Object.keys(o[1]).map(j => (
-									<th>{j}</th>
-								))}
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								{Object.values(o[1]).map(j => (
-									<td>{j}</td>
-								))}
-							</tr>
-						</tbody>
-					</table>
+					<div>
+						<h3>{Object.values(o[0])}</h3>
+						<table className="table">
+							<thead>
+								<tr>
+									{Object.keys(o[1]).map(j => (
+										<th>{j}</th>
+									))}
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									{Object.values(o[1]).map(j => (
+										<td>{j}</td>
+									))}
+								</tr>
+							</tbody>
+							<br></br>
+						</table>
+					</div>
 				))}
 			</div>
 		);
@@ -93,32 +102,35 @@ const starFacade = (function() {
 		);
 		let kdrjl = kdr.map(o => Object.values(Object.values(o)));
 		let kdrjll = kdrjl.map(o => Object.values(o)[1]);
-		console.log(kdr);
 		let count = 0;
 
 		return (
 			<div>
 				{multiTable(info)}
 				{kdrjll.map(o => (
-					<table className="table">
-						<thead>
-							<tr>
-								{Object.keys(Object.values(o)[0]).map(k => (
-									<th>{k}</th>
-								))}
-							</tr>
-						</thead>
-						<tbody>
-							{Object.values(o).map(j => (
+					<div>
+						<h3>{Object.values(kdrjl[count++][0])}</h3>
+
+						<table className="table">
+							<thead>
 								<tr>
-									{Object.values(j).map(k => (
-										<td>{k}</td>
+									{Object.keys(Object.values(o)[0]).map(k => (
+										<th>{k}</th>
 									))}
 								</tr>
-							))}
-						</tbody>
-						<br></br>
-					</table>
+							</thead>
+							<tbody>
+								{Object.values(o).map(j => (
+									<tr>
+										{Object.values(j).map(k => (
+											<td>{k}</td>
+										))}
+									</tr>
+								))}
+							</tbody>
+							<br></br>
+						</table>
+					</div>
 				))}
 			</div>
 		);
