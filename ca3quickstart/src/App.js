@@ -30,7 +30,7 @@ const StarWarsPerson = ({ loggedIn, starFacade }) => {
 	useEffect(() => {
 		starFacade
 			.FetchStar(1)
-			.then(d => setStarInfo(starFacade.MultiTable(d)))
+			.then(d => setStarInfo(starFacade.MultiTable2(d)))
 			.catch(o => console.log(o, "Shit happened"));
 		return () => console.log("cleaned...");
 	}, []);

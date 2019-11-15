@@ -34,7 +34,7 @@ const starFacade = (function() {
 					<thead>
 						<tr>
 							{Object.values(noObjects).map(j => (
-								<td>{j[0]}</td>
+								<th>{j[0]}</th>
 							))}
 						</tr>
 					</thead>
@@ -58,7 +58,6 @@ const starFacade = (function() {
 				typeof Object.values(Object.values(o))[1][Symbol.iterator] !==
 				"function"
 		);
-
 		return (
 			<div>
 				{kdr.map(o => (
@@ -66,7 +65,7 @@ const starFacade = (function() {
 						<thead>
 							<tr>
 								{Object.keys(o[1]).map(j => (
-									<td>{j}</td>
+									<th>{j}</th>
 								))}
 							</tr>
 						</thead>
@@ -83,10 +82,50 @@ const starFacade = (function() {
 		);
 	}
 
+	function MultiTable2(info) {
+		let d = Object.entries({ ...info });
+		let kd = d.filter(o => typeof Object.values(o)[1] === "object");
+		let kdr = kd.filter(
+			o =>
+				typeof Object.values(Object.values(o))[1][Symbol.iterator] ===
+				"function"
+		);
+		let kdrjl = kdr.map(o => Object.values(Object.values(o)));
+		let kdrjll = kdrjl.map(o => Object.values(o)[1]);
+
+		return (
+			<div>
+				{MultiTable(info)}
+				{kdrjll.map(o => (
+					<table className="table">
+						<thead>
+							<tr>
+								{Object.keys(Object.values(o)[0]).map(k => (
+									<th>{k}</th>
+								))}
+							</tr>
+						</thead>
+						<tbody>
+							{Object.values(o).map(j => (
+								<tr>
+									{Object.values(j).map(k => (
+										<td>{k}</td>
+									))}
+								</tr>
+							))}
+						</tbody>
+						<br></br>
+					</table>
+				))}
+			</div>
+		);
+	}
+
 	return {
 		FetchStar: FetchStar,
 		ImbeddedTableCreation: ImbeddedTableCreation,
-		MultiTable: MultiTable
+		MultiTable: MultiTable,
+		MultiTable2: MultiTable2
 	};
 })();
 
