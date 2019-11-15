@@ -20,10 +20,10 @@ const starFacade = (function() {
 		return fetch(
 			configuration.URL + "/api/starwars/starWars/" + id,
 			options
-		).then(o => o.json());
+		).then(o => o.json()); // handleHTTPErrors
 	}
 
-	function ImbeddedTableCreation(info) {
+	function embeddedTableCreation(info) {
 		let filtered = { ...info };
 		let noObjects = Object.entries(filtered).filter(
 			o => typeof o[1] !== "object"
@@ -46,12 +46,12 @@ const starFacade = (function() {
 						</tr>
 					</tbody>
 				</table>
-				{MultiTable2(info)}
+				{multiTable2(info)}
 			</div>
 		);
 	}
 
-	function MultiTable(info) {
+	function multiTable(info) {
 		let d = Object.entries({ ...info });
 		let kd = d.filter(o => typeof Object.values(o)[1] === "object");
 		let kdr = kd.filter(
@@ -83,7 +83,7 @@ const starFacade = (function() {
 		);
 	}
 
-	function MultiTable2(info) {
+	function multiTable2(info) {
 		let d = Object.entries({ ...info });
 		let kd = d.filter(o => typeof Object.values(o)[1] === "object");
 		let kdr = kd.filter(
@@ -98,7 +98,7 @@ const starFacade = (function() {
 
 		return (
 			<div>
-				{MultiTable(info)}
+				{multiTable(info)}
 				{kdrjll.map(o => (
 					<table className="table">
 						<thead>
@@ -126,9 +126,9 @@ const starFacade = (function() {
 
 	return {
 		FetchStar: FetchStar,
-		ImbeddedTableCreation: ImbeddedTableCreation,
-		MultiTable: MultiTable,
-		MultiTable2: MultiTable2
+		embeddedTableCreation: embeddedTableCreation,
+		multiTable: multiTable,
+		multiTable2: multiTable2
 	};
 })();
 
