@@ -36,7 +36,7 @@ const AddBook = ({ factory }) => {
   
     return (
       <div>
-        <h1>Add a book</h1>
+        <h1>Create a User</h1>
         <form
           className="form-horizontal"
           onChange={handleChange}
@@ -53,7 +53,7 @@ const AddBook = ({ factory }) => {
               <input
                 className="form-control"
                 id="userName"
-                placeholder="Enter userName"
+                placeholder="Enter User Name"
                 value={book.userName}
               />
             </div>
@@ -63,7 +63,7 @@ const AddBook = ({ factory }) => {
               <input
                 className="form-control"
                 id="userPass"
-                placeholder="Enter userPass"
+                placeholder="Enter Password"
                 value={book.userPass}
               />
             </div>
