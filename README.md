@@ -1,3 +1,61 @@
+3. Semester, CA3
+
+React app template project.
+
+Deployment Examples:
+=====================
+Back end deployed at: https://www.helvedesmaskine.dk/TeamOne-CA3/
+
+Front end deployed at http://teamone-ca3-front-simon.surge.sh/
+
+Open API: https://www.helvedesmaskine.dk/TeamOne-CA3/openapi/
+
+Group: Team One
+=======================
+Lukas Bjørnvad
+
+Rasmus Prætorius
+https://github.com/Rasm-P
+
+Simon Norup
+
+Henning Wiberg
+
+Group Contract
+==================
+Respect your group members and their work. Try to avoid working on features that other members are currently working on.
+
+If you want to change other members' work, contact them and coordinate.
+
+Whenever you have made a small feature, do the following:
+
+- Test that everything works
+
+- Git add + git commit (with descriptive message)
+
+- Git pull to see if anyone else has pushed, fix possible merge conflicts
+
+- If any changes occured; begin from point 1 again
+
+- Git push
+
+- Tell other members to pull.
+
+- Always wait for other members to finish pushing before pushing a feature yourself.
+
+
+Instructions
+==================
+Preconditions:
+In order to use this code, you should have a local developer setup + a "matching" droplet on Digital Ocean as described in the 3. semester guidelines^
+
+To set up the project frontend, do the following:
+- do "npm install" and "npm install react-router-dom"
+- Change the URL in settings.js
+- to deploy the project with surge: (1) do "npm install -g surge", (2) do "npm run build", and (3) do "surge --project ./build --domain YourDomainName.surge.sh"
+
+Create-React-App Info
+=====================
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
