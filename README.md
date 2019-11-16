@@ -4,11 +4,11 @@ React app template project.
 
 Deployment Examples:
 =====================
-Back end deployed at: https://www.helvedesmaskine.dk/teamone-ca3/
+Back end deployed at: https://www.helvedesmaskine.dk/TeamOne-CA3/
 
-Front end deployed at https://ca3-teamone-front-frontend.surge.sh/
+Front end deployed at http://teamone-ca3-front-simon.surge.sh/
 
-Open API: https://helvedesmaskine.dk/teamone-ca3/openapi/
+Open API: https://www.helvedesmaskine.dk/TeamOne-CA3/openapi/
 
 Group: Team One
 =======================
