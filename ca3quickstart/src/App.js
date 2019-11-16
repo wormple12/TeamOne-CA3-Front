@@ -3,7 +3,7 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import LogIn from "./components/LogIn";
 import Header from "./components/Header";
-import CreateUserPage from "./components/createUserPage";
+import CreateUserPage from "./components/CreateUserPage";
 import StarWarsPage from "./components/StarWarsPage";
 /* import uuid from "uuid/v1"; */
 
@@ -42,9 +42,7 @@ function App({ loginFacade, starFacade, createUserFacade }) {
           <StartPage />
         </Route>
         <Route path="/createUser">
-          <CreateUserPage 
-          factory={createUserFacade}
-          />
+          <CreateUserPage factory={createUserFacade} />
         </Route>
         <Route path="/login">
           <LogIn

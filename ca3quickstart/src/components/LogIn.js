@@ -51,10 +51,34 @@ const LogInForm = ({ login }) => {
   return (
     <div>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit} onChange={handleChange}>
-        <input placeholder="User Name" id="username" />
-        <input placeholder="Password" id="password" />
-        <button>Login</button>
+      <form
+        className="form-horizontal"
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+      >
+        <div className="form-group">
+          <div className="col-sm-9">
+            <input
+              className="form-control"
+              placeholder="User Name"
+              id="username"
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="col-sm-9">
+            <input
+              className="form-control"
+              placeholder="Password"
+              id="password"
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="col-sm-offset-3 col-sm-9">
+            <button className="btn btn-primary">Login</button>
+          </div>
+        </div>
       </form>
     </div>
   );
