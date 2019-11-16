@@ -5,18 +5,11 @@ import LogIn from "./components/LogIn";
 import Header from "./components/Header";
 import CreateUserPage from "./components/CreateUserPage";
 import StarWarsPage from "./components/StarWarsPage";
+import StartPage from "./components/Home";
 /* import uuid from "uuid/v1"; */
 
 const NoMatch = () => {
   return <h3>The page was not found.</h3>;
-};
-
-const StartPage = () => {
-  return (
-    <div>
-      <h1>Start Page</h1>
-    </div>
-  );
 };
 
 function App({ loginFacade, starFacade, createUserFacade }) {
