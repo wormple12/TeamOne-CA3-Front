@@ -4,7 +4,7 @@ React app template project.
 
 Deployment Examples:
 =====================
-Back end deployed at: https://www.helvedesmaskine.dk/TeamOne-CA3/
+Back end deployed at: https://www.mutezone.site/TeamOne-CA3/
 
 Front end deployed at http://teamone-ca3-front-simon.surge.sh/
 
@@ -20,6 +20,7 @@ https://github.com/Rasm-P
 Simon Norup
 
 Henning Wiberg
+https://github.com/Mutestock
 
 Group Contract
 ==================
