@@ -55,10 +55,7 @@ const StartPage = () => {
 				<a href="https://github.com/mutestock/TeamOne-CA3">
 					security branch startcode
 				</a>
-				<br></br>
-				<br></br>
-				<li>Back:</li>
-				<br></br>
+				Back:
 				<li>
 					{" "}
 					Added fetchers for the SWAPI api, made DTOs for the fetched data
