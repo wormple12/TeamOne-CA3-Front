@@ -3,17 +3,31 @@ import { NavLink } from "react-router-dom";
 
 const Header = ({ loggedIn }) => {
   const userHeaders = loggedIn ? (
-    <li>
-      <NavLink activeClassName="active" to="/starWars">
-        Star Wars
-      </NavLink>
-    </li>
+    <div>
+      <li>
+        <NavLink activeClassName="active" to="/starWars">
+          Star Wars
+        </NavLink>
+      </li>
+      <li>
+        <NavLink activeClassName="active" to="/logout">
+          Log Out
+        </NavLink>
+      </li>
+    </div>
   ) : (
-    <li>
-      <NavLink activeClassName="active" to="/createUser">
-        Create User
-      </NavLink>
-    </li>
+    <div>
+      <li>
+        <NavLink activeClassName="active" to="/createUser">
+          Create User
+        </NavLink>
+      </li>
+      <li>
+        <NavLink activeClassName="active" to="/login">
+          Log In
+        </NavLink>
+      </li>
+    </div>
   );
   return (
     <ul className="header">
@@ -22,12 +36,6 @@ const Header = ({ loggedIn }) => {
           Home
         </NavLink>
       </li>
-      <li>
-        <NavLink activeClassName="active" to="/login">
-          Log In
-        </NavLink>
-      </li>
-
       {userHeaders}
     </ul>
   );

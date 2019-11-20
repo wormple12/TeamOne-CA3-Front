@@ -2,9 +2,12 @@ import loginFacade from "./loginFacade";
 import uuid from "uuid/v1";
 import React from "react";
 
-export function catchHttpErrors(err) {
+export function catchHttpErrors(err, alert) {
   if (err.status) {
-    err.fullError.then(e => console.log(e.detail));
+    err.fullError.then(e => {
+      console.log(e.detail);
+      if (alert) alert(e.message);
+    });
   } else {
     console.log("Network error");
   }

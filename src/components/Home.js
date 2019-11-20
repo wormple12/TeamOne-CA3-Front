@@ -1,8 +1,22 @@
 import React from "react";
 
-const StartPage = () => {
+const StartPage = ({ loginFacade, loggedIn }) => {
+  let userInfo = "";
+  if (loggedIn) {
+    const decoder = loginFacade.tokenDecoder();
+    userInfo = "You are logged in as (" + decoder.roles + "): " + decoder.sub;
+    userInfo = (
+      <div>
+        <h5>
+          You are logged in as ({decoder.roles}): {decoder.sub}
+        </h5>
+        <hr />
+      </div>
+    );
+  }
   return (
     <div>
+      {userInfo}
       <h1>Quick Start Project</h1>
       <h4>Template Instructions</h4>
       <p>

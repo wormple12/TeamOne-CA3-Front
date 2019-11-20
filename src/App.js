@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 import "./App.css";
 import LogIn from "./components/LogIn";
 import Header from "./components/Header";
@@ -27,12 +32,18 @@ function App({ loginFacade, starFacade, createUserFacade }) {
     return () => clearInterval(interval);
   }, []);
 
+  const LogOut = () => {
+    loginFacade.logout();
+    setLoggedIn(false);
+    return <Redirect to="/" />;
+  };
+
   return (
     <Router>
       <Header loggedIn={loggedIn} starId={starId} />
       <Switch>
         <Route exact path="/">
-          <StartPage />
+          <StartPage loginFacade={loginFacade} loggedIn={loggedIn} />
         </Route>
         <Route path="/createUser">
           <CreateUserPage factory={createUserFacade} />
@@ -44,6 +55,9 @@ function App({ loginFacade, starFacade, createUserFacade }) {
             setLoggedIn={setLoggedIn}
             starFacade={starFacade}
           />
+        </Route>
+        <Route path="/logout">
+          <LogOut />
         </Route>
         <Route path="/starWars">
           <StarWarsPage
