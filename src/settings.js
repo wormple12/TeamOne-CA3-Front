@@ -1,7 +1,7 @@
 // for development:
 // const URL = "http://localhost:8080/teamone-ca3";
 // actual deployed backend:
-const URL = "https://mutezone.site/TeamOne-CA3";
+const URL = "https://www.helvedesmaskine.dk/TeamOne-CA3";
 
 const configuration = (function() {
   return {
