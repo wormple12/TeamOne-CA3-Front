@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+div.mainContainer {
+  padding: 15px;
+}
+
 ul.header {
   list-style-type: none;
   margin: 0;

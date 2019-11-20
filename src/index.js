@@ -8,11 +8,15 @@ import createUserFacade from "./createUserFacade";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const AppFacadeTime = () => {
-	return (
-		<div>
-			<App loginFacade={loginFacade} starFacade={starFacade} createUserFacade={createUserFacade} />
-		</div>
-	);
+  return (
+    <div>
+      <App
+        loginFacade={loginFacade}
+        starFacade={starFacade}
+        createUserFacade={createUserFacade}
+      />
+    </div>
+  );
 };
 
 ReactDOM.render(<AppFacadeTime />, document.getElementById("root"));

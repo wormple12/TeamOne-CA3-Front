@@ -3,10 +3,6 @@ import { Redirect } from "react-router-dom";
 import { catchHttpErrors, makeOptions } from "../utils";
 
 const LogIn = ({ apiFacade, loggedIn, setLoggedIn }) => {
-  const logout = () => {
-    apiFacade.logout();
-    setLoggedIn(false);
-  };
   const login = (user, pass) => {
     apiFacade
       .login(user, pass)

@@ -41,38 +41,40 @@ function App({ loginFacade, starFacade, createUserFacade }) {
   return (
     <Router>
       <Header loggedIn={loggedIn} starId={starId} />
-      <Switch>
-        <Route exact path="/">
-          <StartPage loginFacade={loginFacade} loggedIn={loggedIn} />
-        </Route>
-        <Route path="/createUser">
-          <CreateUserPage factory={createUserFacade} />
-        </Route>
-        <Route path="/login">
-          <LogIn
-            apiFacade={loginFacade}
-            loggedIn={loggedIn}
-            setLoggedIn={setLoggedIn}
-            starFacade={starFacade}
-          />
-        </Route>
-        <Route path="/logout">
-          <LogOut />
-        </Route>
-        <Route path="/starWars">
-          <StarWarsPage
-            starFacade={starFacade}
-            loggedIn={loggedIn}
-            starInfo={starInfo}
-            setStarInfo={setStarInfo}
-            id={starId}
-            setId={setStarId}
-          />
-        </Route>
-        <Route>
-          <NoMatch />
-        </Route>
-      </Switch>
+      <div className="mainContainer">
+        <Switch>
+          <Route exact path="/">
+            <StartPage loginFacade={loginFacade} loggedIn={loggedIn} />
+          </Route>
+          <Route path="/createUser">
+            <CreateUserPage factory={createUserFacade} />
+          </Route>
+          <Route path="/login">
+            <LogIn
+              apiFacade={loginFacade}
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              starFacade={starFacade}
+            />
+          </Route>
+          <Route path="/logout">
+            <LogOut />
+          </Route>
+          <Route path="/starWars">
+            <StarWarsPage
+              starFacade={starFacade}
+              loggedIn={loggedIn}
+              starInfo={starInfo}
+              setStarInfo={setStarInfo}
+              id={starId}
+              setId={setStarId}
+            />
+          </Route>
+          <Route>
+            <NoMatch />
+          </Route>
+        </Switch>
+      </div>
     </Router>
   );
 }
