@@ -2,19 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import loginFacade from "./loginFacade";
-import starFacade from "./starFacade";
-import createUserFacade from "./createUserFacade";
+import loginFacade from "./facades/loginFacade";
+import recipeFacade from "./facades/recipeFacade";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const AppFacadeTime = () => {
   return (
     <div>
-      <App
-        loginFacade={loginFacade}
-        starFacade={starFacade}
-        createUserFacade={createUserFacade}
-      />
+      <App loginFacade={loginFacade} recipeFacade={recipeFacade} />
     </div>
   );
 };

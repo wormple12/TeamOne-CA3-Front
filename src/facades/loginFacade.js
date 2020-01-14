@@ -1,5 +1,5 @@
-import configuration from "./settings";
-import { handleHttpErrors } from "./utils";
+import configuration from "../settings";
+import { handleHttpErrors } from "../utils";
 import jwt_decode from "jwt-decode";
 
 const URL = configuration.URL;
@@ -26,8 +26,12 @@ function loginFacade() {
 
   const tokenDecoder = () => {
     let decodedToken = jwt_decode(localStorage.getItem("jwtToken"));
-    console.log(decodedToken);
     return decodedToken;
+  };
+
+  const isAdmin = () => {
+    const decoder = tokenDecoder();
+    return decoder.roles.includes("admin");
   };
 
   const setToken = token => {
@@ -61,6 +65,7 @@ function loginFacade() {
     getToken: getToken,
     makeOptions: makeOptions,
     tokenDecoder: tokenDecoder,
+    isAdmin: isAdmin,
     loggedIn: loggedIn,
     login: login,
     logout: logout

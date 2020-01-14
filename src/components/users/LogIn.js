@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { catchHttpErrors, makeOptions } from "../utils";
+import { catchHttpErrors } from "../../utils";
 
 const LogIn = ({ apiFacade, loggedIn, setLoggedIn }) => {
   const login = (user, pass) => {
@@ -30,7 +30,6 @@ const LogInForm = ({ login }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log("Submission..");
     login(user.username, user.password);
   };
 
@@ -55,6 +54,7 @@ const LogInForm = ({ login }) => {
           <div className="col-sm-9">
             <input
               className="form-control"
+              type="password"
               placeholder="Password"
               id="password"
             />

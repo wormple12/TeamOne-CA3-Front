@@ -1,14 +1,14 @@
-3. Semester, CA3
+3. Semester, Exam
 
-React app template project.
+Sem3-Exam-Front
 
 Deployment Examples:
 =====================
-Back end deployed at: https://www.helvedesmaskine.dk/TeamOne-CA3/
+Back end deployed at: https://helvedesmaskine.dk/Sem3-Project
 
-Front end deployed at http://teamone-ca3-front-simon.surge.sh/
+Front end deployed at http://teamone-sem3-exam-project.surge.sh/
 
-Open API: https://www.helvedesmaskine.dk/TeamOne-CA3/openapi/
+Open API: https://helvedesmaskine.dk/Sem3-Project/openapi/
 
 Group: Team One
 =======================

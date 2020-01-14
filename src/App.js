@@ -6,31 +6,44 @@ import {
   Redirect
 } from "react-router-dom";
 import "./App.css";
-import LogIn from "./components/LogIn";
-import Header from "./components/Header";
-import CreateUserPage from "./components/CreateUserPage";
-import StarWarsPage from "./components/StarWarsPage";
-import StartPage from "./components/Home";
-/* import uuid from "uuid/v1"; */
+import { catchHttpErrors } from "./utils";
+import LogIn from "./editorRecipes/users/LogIn";
+import Header from "./editorRecipes/Header";
+import CreateRecipePage from "./editorRecipes/recipes/CreateRecipePage";
+import Main from "./editorRecipes/Main";
 
-const NoMatch = () => {
-  return <h3>The page was not found.</h3>;
-};
+function App({ loginFacade, recipeFacade }) {
+  const [loggedIn, setLoggedIn] = useState(loginFacade.loggedIn());
+  // recipe browsing hooks:
+  const [recipes, setRecipes] = useState([]);
+  const [recipeDetails, setRecipeDetails] = useState("");
+  // recipe creation hook:
+  let [editorRecipe, setEditorRecipe] = useState({});
+  // plan calendar hooks:
+  const [allPlans, setAllPlans] = useState([]);
+  // menu plan hooks:
+  const [currentChoice, setCurrentChoice] = useState([]);
 
-function App({ loginFacade, starFacade, createUserFacade }) {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [starInfo, setStarInfo] = useState(null);
-  const [starId, setStarId] = useState("");
-
-  // check token regularly
   useEffect(() => {
-    /* loginFacade.logout(); */
-    const interval = setInterval(() => {
-      setLoggedIn(loginFacade.loggedIn());
-    }, 10000);
-    setLoggedIn(loginFacade.loggedIn());
-    return () => clearInterval(interval);
+    setRecipes([]);
+    setRecipeDetails("");
+    setEditorRecipe({}); // reset all input fields
+    updateRecipeList();
   }, []);
+
+  function updateRecipeList() {
+    recipeFacade
+      .fetchAllRecipes()
+      .then(recipes => setRecipes(recipes))
+      .catch(catchHttpErrors);
+  }
+
+  /* useEffect(() => {
+    recipeFacade
+      .fetchAllPlans()
+      .then(plans => setAllPlans(plans))
+      .catch(catchHttpErrors);
+  }, []); */
 
   const LogOut = () => {
     loginFacade.logout();
@@ -38,37 +51,51 @@ function App({ loginFacade, starFacade, createUserFacade }) {
     return <Redirect to="/" />;
   };
 
+  const NoMatch = () => {
+    return <h3>The page was not found.</h3>;
+  };
+
   return (
     <Router>
-      <Header loggedIn={loggedIn} starId={starId} />
+      <Header loginFacade={loginFacade} loggedIn={loggedIn} />
       <div className="mainContainer">
         <Switch>
           <Route exact path="/">
-            <StartPage loginFacade={loginFacade} loggedIn={loggedIn} />
+            <Redirect to="/browse" />
           </Route>
-          <Route path="/createUser">
-            <CreateUserPage factory={createUserFacade} />
+          <Route path="/browse">
+            <Main
+              loginFacade={loginFacade}
+              loggedIn={loggedIn}
+              recipeFacade={recipeFacade}
+              recipes={recipes}
+              recipeDetails={recipeDetails}
+              setRecipeDetails={setRecipeDetails}
+              setEditorRecipe={setEditorRecipe}
+              currentChoice={currentChoice}
+              setCurrentChoice={setCurrentChoice}
+              updateRecipeList={updateRecipeList}
+              /* allPlans={allPlans}
+              setAllPlans={setAllPlans} */
+            />
+          </Route>
+          <Route path="/editor">
+            <CreateRecipePage
+              recipeFacade={recipeFacade}
+              editorRecipe={editorRecipe}
+              setEditorRecipe={setEditorRecipe}
+              updateRecipeList={updateRecipeList}
+            />
           </Route>
           <Route path="/login">
             <LogIn
               apiFacade={loginFacade}
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
-              starFacade={starFacade}
             />
           </Route>
           <Route path="/logout">
             <LogOut />
-          </Route>
-          <Route path="/starWars">
-            <StarWarsPage
-              starFacade={starFacade}
-              loggedIn={loggedIn}
-              starInfo={starInfo}
-              setStarInfo={setStarInfo}
-              id={starId}
-              setId={setStarId}
-            />
           </Route>
           <Route>
             <NoMatch />

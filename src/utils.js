@@ -1,12 +1,13 @@
-import loginFacade from "./loginFacade";
+import loginFacade from "./facades/loginFacade";
 import uuid from "uuid/v1";
 import React from "react";
+import LZString from "lz-string";
 
-export function catchHttpErrors(err, alert) {
+export function catchHttpErrors(err) {
   if (err.status) {
     err.fullError.then(e => {
       console.log(e.detail);
-      if (alert) alert(e.message);
+      alert(e.message);
     });
   } else {
     console.log("Network error");
@@ -16,8 +17,11 @@ export function catchHttpErrors(err, alert) {
 export function handleHttpErrors(res) {
   if (!res.ok) {
     return Promise.reject({ status: res.status, fullError: res.json() });
+  } else if (res.status !== 204) {
+    return res.json();
+  } else {
+    return Promise.resolve({ rip: "" });
   }
-  return res.json();
 }
 
 export const makeOptions = (method, addToken, body) => {
@@ -37,27 +41,40 @@ export const makeOptions = (method, addToken, body) => {
   return opts;
 };
 
+export function setCookie(name, value, exdays) {
+  localStorage.setItem(name, JSON.stringify(value));
+}
+
+export function getCookie(name) {
+  const result = JSON.parse(localStorage.getItem(name));
+  return result;
+}
+
+export function generateListFromObject(obj) {
+  // not taking lists into account yet
+  let pairs = [];
+  for (const [key, value] of Object.entries(obj)) {
+    pairs.push(
+      <li key={key} className="list-group-item">
+        <b>{key}:</b> {value}
+      </li>
+    );
+  }
+  return <ul className="list-group">{pairs}</ul>;
+}
+
 const tableTime = (function() {
   function embeddedTableCreation(info) {
     let filtered = { ...info };
-    console.log(filtered);
     filtered = Object.entries(filtered).filter(
       o => !(Object.values(o[1]).length <= 0)
     );
-    console.log("filtered+", filtered);
 
     let restructured = {};
-
-    //filtered.map(arr => {
-    //	restructured.push(
-    //		Object.assign(Object.values(arr)[0], Object.values(arr)[1])
-    //	);
-    //});
 
     filtered.map(arr => {
       restructured[Object.values(arr)[0]] = Object.values(arr)[1];
     });
-    console.log("restructured:", restructured);
 
     let noObjects = Object.entries(restructured).filter(
       o => typeof o[1] !== "object"
@@ -65,7 +82,6 @@ const tableTime = (function() {
 
     return (
       <div>
-        <h3>Person</h3>
         <table className="table">
           <thead>
             <tr>
@@ -90,12 +106,6 @@ const tableTime = (function() {
 
   function multiTable(info) {
     let d = Object.entries({ ...info });
-    //console.log(d);
-    //Object.values(d).map(o => console.log(o));
-    //Object.values(d).map(o => console.log(o[1].length));
-    //d = Object.values(d).filter(o => !(o[1].length <= 0));
-    //console.log(d);
-
     let kd = d.filter(o => typeof Object.values(o)[1] === "object");
     let kdr = kd.filter(
       o =>

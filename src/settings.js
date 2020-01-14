@@ -1,7 +1,8 @@
 // for development:
-// const URL = "http://localhost:8080/teamone-ca3";
+//const URL = "http://localhost:8080/Sem3-Exam-Programming-Back/api/recipe";
 // actual deployed backend:
-const URL = "https://www.helvedesmaskine.dk/TeamOne-CA3";
+const URL =
+  "https://www.helvedesmaskine.dk/Sem3-Exam-Programming-Back/api/recipe";
 
 const configuration = (function() {
   return {
